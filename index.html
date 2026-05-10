@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Quartet — Creative Team Portfolio</title>
+<meta name="description" content="Quartet — a four-person creative team of developers, designers, and engineers." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+<style>
+  :root{
+    --bg:#0a0a0f;
+    --surface:#0f0f1a;
+    --surface-2:#15152400;
+    --text:#f5f5fa;
+    --muted:#8a8aa0;
+    --accent-1:#7c5cbf;
+    --accent-2:#a07ee0;
+    --border:rgba(255,255,255,0.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body{min-height:100vh;position:relative}
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(60% 50% at 80% 50%, rgba(124,92,191,0.18), transparent 70%),
+      radial-gradient(40% 40% at 10% 20%, rgba(160,126,224,0.10), transparent 70%);
+  }
+
+  /* Navbar */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 40px;
+    backdrop-filter:blur(8px);
+    background:linear-gradient(to bottom, rgba(10,10,15,0.6), transparent);
+  }
+  .brand{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:.02em;font-size:18px}
+  .nav-links{display:flex;gap:34px}
+  .nav-links a{color:var(--text);text-decoration:none;font-size:14px;opacity:.85;transition:opacity .2s}
+  .nav-links a:hover{opacity:1;color:var(--accent-2)}
+
+  /* Slider */
+  .stage{position:relative;min-height:100vh;padding-top:90px;z-index:1}
+  .viewport{overflow:hidden;width:100%;height:calc(100vh - 90px);min-height:620px}
+  .track{display:flex;height:100%;transition:transform .7s cubic-bezier(.7,0,.2,1);will-change:transform}
+  .card{
+    flex:0 0 100%;
+    height:100%;
+    padding:40px 80px;
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    gap:40px;
+    align-items:center;
+    position:relative;
+  }
+  @media(min-width:1100px){
+    .card{flex:0 0 85%;}
+  }
+
+  .card-inner{
+    position:relative;height:100%;width:100%;
+    background:linear-gradient(180deg, rgba(15,15,26,0.6), rgba(10,10,15,0.4));
+    border:1px solid var(--border);
+    border-radius:28px;
+    overflow:hidden;
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    grid-column:1 / -1;
+  }
+  .col-text{
+    padding:60px 56px;
+    display:flex;flex-direction:column;justify-content:center;gap:20px;
+    position:relative;z-index:2;
+  }
+  .eyebrow{color:var(--muted);font-size:14px;letter-spacing:.04em}
+  .name{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:clamp(44px,6vw,84px);
+    line-height:1;
+    letter-spacing:-.02em;
+  }
+  .role{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:clamp(28px,3.4vw,48px);
+    line-height:1.05;
+    letter-spacing:-.01em;
+    background:linear-gradient(135deg, var(--accent-2), var(--accent-1));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    margin-top:6px;
+  }
+  .role .role-eyebrow{
+    display:block;
+    font-family:'Inter',sans-serif;font-weight:500;font-size:14px;
+    color:var(--accent-2);-webkit-text-fill-color:var(--accent-2);
+    letter-spacing:.06em;margin-bottom:6px;
+  }
+  .bio{color:var(--muted);font-size:15px;line-height:1.7;max-width:46ch;margin-top:8px}
+
+  .col-image{
+    position:relative;overflow:hidden;
+  }
+  .col-image::before{
+    content:"";position:absolute;inset:-10%;
+    background:radial-gradient(50% 50% at 50% 55%, rgba(124,92,191,0.55), transparent 65%);
+    filter:blur(20px);
+  }
+  .portrait{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    mask-image:radial-gradient(75% 80% at 55% 55%, #000 60%, transparent 100%);
+    -webkit-mask-image:radial-gradient(75% 80% at 55% 55%, #000 60%, transparent 100%);
+  }
+
+  /* socials + resume */
+  .card-foot{
+    position:absolute;left:56px;bottom:36px;display:flex;gap:10px;z-index:3;
+  }
+  .icon-btn{
+    width:38px;height:38px;border-radius:10px;
+    border:1px solid var(--border);background:rgba(255,255,255,0.02);
+    color:var(--text);display:grid;place-items:center;cursor:pointer;
+    text-decoration:none;font-size:18px;transition:all .2s;
+  }
+  .icon-btn:hover{border-color:var(--accent-2);color:var(--accent-2);transform:translateY(-1px)}
+
+  .resume{
+    position:absolute;right:56px;bottom:36px;z-index:3;
+    display:inline-flex;align-items:center;gap:8px;
+    padding:10px 18px;border-radius:999px;
+    border:1px solid var(--border);background:rgba(255,255,255,0.02);
+    color:var(--text);text-decoration:none;font-size:12px;letter-spacing:.18em;font-weight:500;
+    transition:all .2s;
+  }
+  .resume:hover{border-color:var(--accent-2);color:var(--accent-2)}
+
+  /* Arrows */
+  .arrow{
+    position:fixed;top:50%;transform:translateY(-50%);
+    width:48px;height:48px;border-radius:999px;
+    background:rgba(15,15,26,0.7);border:1px solid var(--border);
+    color:var(--text);display:grid;place-items:center;cursor:pointer;
+    z-index:40;backdrop-filter:blur(8px);font-size:22px;
+    transition:all .2s;
+  }
+  .arrow:hover{border-color:var(--accent-2);color:var(--accent-2);background:rgba(15,15,26,0.9)}
+  .arrow:disabled{opacity:.3;cursor:not-allowed}
+  .arrow.left{left:20px}
+  .arrow.right{right:20px}
+
+  /* dots */
+  .dots{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:40}
+  .dot{width:24px;height:3px;border-radius:2px;background:rgba(255,255,255,0.15);border:none;cursor:pointer;transition:background .2s}
+  .dot.active{background:linear-gradient(90deg,var(--accent-1),var(--accent-2))}
+
+  @media (max-width:880px){
+    .nav{padding:16px 20px}
+    .nav-links{gap:18px}
+    .card{padding:20px;grid-template-columns:1fr}
+    .card-inner{grid-template-columns:1fr;grid-template-rows:1fr 1.1fr}
+    .col-image{order:-1;min-height:280px}
+    .col-text{padding:32px 28px 110px}
+    .card-foot{left:28px;bottom:24px}
+    .resume{right:28px;bottom:24px}
+    .arrow.left{left:10px}.arrow.right{right:10px}
+  }
+</style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="brand">Quartet</div>
+    <div class="nav-links">
+      <a href="#">About Us</a>
+      <a href="#">Projects</a>
+      <a href="#">Contact</a>
+    </div>
+  </nav>
+
+  <main class="stage">
+    <div class="viewport">
+      <div class="track" id="track"></div>
+    </div>
+  </main>
+
+  <button class="arrow left" id="prev" aria-label="Previous"><i class="ti ti-arrow-left"></i></button>
+  <button class="arrow right" id="next" aria-label="Next"><i class="ti ti-arrow-right"></i></button>
+  <div class="dots" id="dots"></div>
+
+<script>
+const members = [
+  { eyebrow:"Hello, I'm", first:"Anya", last:"Wrooks", roleTag:"Creative", role:"Developer & Designer",
+    bio:"Anya blends interaction design with frontend craft. She leads our design system and prototypes the experiences clients remember.", img:47 },
+  { eyebrow:"Meet", first:"Bram", last:"Volkov", roleTag:"Product", role:"Engineer & Strategist",
+    bio:"Bram turns vague briefs into shipped products. He owns architecture, scoping, and the difficult tradeoffs nobody else wants.", img:12 },
+  { eyebrow:"Say hi to", first:"Cleo", last:"Marsh", roleTag:"Motion", role:"Designer & Illustrator",
+    bio:"Cleo gives our work its pulse — animation, illustration, and brand storytelling that move beyond the static frame.", img:45 },
+  { eyebrow:"This is", first:"Dario", last:"Kent", roleTag:"Backend", role:"Architect & DevOps",
+    bio:"Dario keeps the lights on. APIs, infra, observability — if it runs in production, he's already thought about how it could fail.", img:33 },
+];
+
+const track = document.getElementById('track');
+const dotsEl = document.getElementById('dots');
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
+
+members.forEach((m,i)=>{
+  const card = document.createElement('section');
+  card.className = 'card';
+  card.innerHTML = `
+    <div class="card-inner">
+      <div class="col-text">
+        <div class="eyebrow">${m.eyebrow}</div>
+        <h1 class="name">${m.first}<br/>${m.last}</h1>
+        <div class="role">
+          <span class="role-eyebrow">${m.roleTag}</span>
+          ${m.role.replace(' & ','<br/>& ')}
+        </div>
+        <p class="bio">${m.bio}</p>
+      </div>
+      <div class="col-image">
+        <img class="portrait" src="https://i.pravatar.cc/800?img=${m.img}" alt="${m.first} ${m.last}" />
+      </div>
+      <div class="card-foot">
+        <a class="icon-btn" href="#" aria-label="GitHub"><i class="ti ti-brand-github"></i></a>
+        <a class="icon-btn" href="#" aria-label="LinkedIn"><i class="ti ti-brand-linkedin"></i></a>
+        <a class="icon-btn" href="#" aria-label="Instagram"><i class="ti ti-brand-instagram"></i></a>
+      </div>
+      <a class="resume" href="#">RESUME <i class="ti ti-arrow-up-right"></i></a>
+    </div>
+  `;
+  track.appendChild(card);
+
+  const dot = document.createElement('button');
+  dot.className = 'dot' + (i===0?' active':'');
+  dot.addEventListener('click',()=>go(i));
+  dotsEl.appendChild(dot);
+});
+
+let index = 0;
+function update(){
+  const cardW = track.children[0].getBoundingClientRect().width;
+  track.style.transform = `translateX(${-index * cardW}px)`;
+  prevBtn.disabled = index===0;
+  nextBtn.disabled = index===members.length-1;
+  [...dotsEl.children].forEach((d,i)=>d.classList.toggle('active',i===index));
+}
+function go(i){ index = Math.max(0, Math.min(members.length-1, i)); update(); }
+
+prevBtn.addEventListener('click',()=>go(index-1));
+nextBtn.addEventListener('click',()=>go(index+1));
+window.addEventListener('keydown',e=>{
+  if(e.key==='ArrowLeft') go(index-1);
+  if(e.key==='ArrowRight') go(index+1);
+});
+window.addEventListener('resize',update);
+
+let touchX=null;
+track.addEventListener('touchstart',e=>touchX=e.touches[0].clientX,{passive:true});
+track.addEventListener('touchend',e=>{
+  if(touchX===null) return;
+  const dx = e.changedTouches[0].clientX - touchX;
+  if(Math.abs(dx)>50) go(index + (dx<0?1:-1));
+  touchX=null;
+});
+
+requestAnimationFrame(update);
+</script>
+</body>
+</html>
