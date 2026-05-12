@@ -1,0 +1,22 @@
+# Secrets
+*.pem
+*.key
+*.crt
+*.pfx
+*.p12
+*.env
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Logs
+*.log
+
+# Build output (common)
+dist/
+build/
+
+# Dependency folders (if added later)
+node_modules/
