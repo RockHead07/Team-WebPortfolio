@@ -18,7 +18,7 @@ Whether you are looking to hire a full team or seeking design inspiration, Quart
 
 </div>
 
-## 🎨 The Simpsons Inspiration & Design Concept
+## 🐝 The Simpsons Inspiration & Design Concept
 
 This project demonstrates how a highly recognizable cartoon aesthetic can be adapted into a professional, modern user interface. Instead of resorting to loud or childish designs, Quartet elevates the theme using premium UI patterns:
 
@@ -49,7 +49,7 @@ The portfolio is structured around four unique creative personas, each represent
 | `hawwin.png` | **Hawwin** | Motion Designer & Illustrator | After Effects, Illustrator, Lottie |
 | `yardan.png` | **Yardan** | Backend Architect & DevOps | Laravel, Docker, PostgreSQL |
 
-## 🚀 Key Features
+## 💛 Key Features
 
 * **Dynamic Carousel Stage**: A smooth, transform-based card slider with custom hardware-accelerated transitions.
 * **Multi-modal Navigation**:
@@ -66,7 +66,7 @@ The codebase is designed to be lightweight, fast, and entirely self-contained:
 * [index.html](file:///D:/Dev/Projects/Team-WebPortfolio/index.html) — Contains the semantic HTML markup, embedded CSS stylesheet (with extensive Simpson-themed design tokens), and JavaScript logic for the slider transitions and interactive event handlers.
 * `assets/` — Stores member portraits (`aldino.png`, `bagus.png`, `hawwin.png`, `yardan.png`) and vector icons.
 
-## 💻 Getting Started
+## ⭐ Getting Started
 
 Since the project uses vanilla HTML, CSS, and JavaScript with no external build dependencies, running the application is straightforward:
 

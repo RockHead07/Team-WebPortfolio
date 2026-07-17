@@ -587,6 +587,13 @@ body::after {
 </head>
 <body>
 
+<div id="loader" style="position:fixed; inset:0; background:#F3F4F4; z-index:9999; display:grid; place-items:center; transition:opacity .4s ease;">
+  <div style="text-align:center; font-family:'Syne',sans-serif;">
+    <div style="font-size:24px; font-weight:800; color:#FF9A00; letter-spacing:0.1em;">LOADING</div>
+    <div id="loader-progress" style="font-size:14px; margin-top:8px; font-family:'DM Sans',sans-serif; color:#757575;">0%</div>
+  </div>
+</div>
+
 <nav class="nav">
   <div class="brand">Quartet</div>
   <div class="nav-links">
@@ -786,6 +793,35 @@ track.classList.add('no-transition');
 update();
 track.offsetHeight; // force reflow
 track.classList.remove('no-transition');
+
+// Preload images and fade out the loader overlay
+const preloadImages = () => {
+  const loader = document.getElementById('loader');
+  const progress = document.getElementById('loader-progress');
+  let loaded = 0;
+
+  if (members.length === 0) {
+    loader.style.opacity = '0';
+    setTimeout(() => loader.remove(), 400);
+    return;
+  }
+
+  members.forEach(m => {
+    const img = new Image();
+    img.src = m.img;
+    const onDone = () => {
+      loaded++;
+      progress.textContent = `${Math.round((loaded / members.length) * 100)}%`;
+      if (loaded === members.length) {
+        loader.style.opacity = '0';
+        setTimeout(() => loader.remove(), 400);
+      }
+    };
+    img.onload = onDone;
+    img.onerror = onDone;
+  });
+};
+preloadImages();
 </script>
 </body>
 </html>
