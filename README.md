@@ -2,9 +2,11 @@
 
 <img width="320" alt="Image" src="https://github.com/user-attachments/assets/a216c3f2-c9b8-4272-a243-46ff2f0dbe11" />
 
-  <img src="https://img.shields.io/badge/Theme-Simpsons%20Cartoon-FFD93D?style=for-the-badge&labelColor=2C2C2C" alt="Simpsons Theme" />
-  <img src="https://img.shields.io/badge/Team-4%20Creative%20Members-FF9A00?style=for-the-badge&labelColor=4F200D" alt="4 Members" />
-  <img src="https://img.shields.io/badge/Stack-HTML5%20%2F%20CSS3%20%2F%20JS-4F200D?style=for-the-badge&labelColor=FFD93D" alt="Stack" />
+<br>
+
+<img src="https://img.shields.io/badge/Theme-Simpsons%20Cartoon-FFD93D?style=for-the-badge&labelColor=2C2C2C" alt="Simpsons Theme" />
+<img src="https://img.shields.io/badge/Team-4%20Creative%20Members-FF9A00?style=for-the-badge&labelColor=4F200D" alt="4 Members" />
+<img src="https://img.shields.io/badge/Stack-HTML5%20%2F%20CSS3%20%2F%20JS-4F200D?style=for-the-badge&labelColor=FFD93D" alt="Stack" />
 
 # Quartet: Simpsons-Inspired Team Portfolio
 
