@@ -1,6 +1,5 @@
-<img width="320" alt="Image" src="https://github.com/user-attachments/assets/a216c3f2-c9b8-4272-a243-46ff2f0dbe11" />
-
 <div align="Center">
+<img width="320" alt="Image" src="https://github.com/user-attachments/assets/a216c3f2-c9b8-4272-a243-46ff2f0dbe11" />
 
 # Quartet: Simpsons-Inspired Team Portfolio
   <img src="https://img.shields.io/badge/Theme-Simpsons%20Cartoon-FFD93D?style=for-the-badge&labelColor=2C2C2C" alt="Simpsons Theme" />
