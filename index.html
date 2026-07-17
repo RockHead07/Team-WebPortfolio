@@ -253,6 +253,10 @@ body::after {
   will-change: transform;
 }
 
+.track.no-transition {
+  transition: none !important;
+}
+
 .card {
   flex: 0 0 100%;
   height: 100%;
@@ -648,10 +652,11 @@ const dotsEl  = document.getElementById('dots');
 const prevBtn = document.getElementById('prev');
 const nextBtn = document.getElementById('next');
 
-members.forEach((m, i) => {
+// Helper to create card HTML elements
+function createCard(m, originalIndex) {
   const card = document.createElement('section');
   card.className = 'card';
-  const num = String(i + 1).padStart(2, '0');
+  const num = String(originalIndex + 1).padStart(2, '0');
 
   card.innerHTML = `
     <div class="card-inner">
@@ -686,30 +691,66 @@ members.forEach((m, i) => {
       <a class="resume" href="#">RESUME <i class="ti ti-arrow-up-right" aria-hidden="true"></i></a>
     </div>
   `;
+  return card;
+}
 
-  track.appendChild(card);
+// Build the carousel track with clones:
+// [Clone of Last] [Originals 0..N-1] [Clone of First]
+
+// 1. Prepend clone of last member
+const lastMember = members[members.length - 1];
+track.appendChild(createCard(lastMember, members.length - 1));
+
+// 2. Add original members & build dots
+members.forEach((m, i) => {
+  track.appendChild(createCard(m, i));
 
   const dot = document.createElement('button');
   dot.className = 'dot' + (i === 0 ? ' active' : '');
   dot.setAttribute('aria-label', `Go to ${m.first} ${m.last}`);
-  dot.addEventListener('click', () => go(i));
+  dot.addEventListener('click', () => go(i + 1));
   dotsEl.appendChild(dot);
 });
 
-let index = 0;
+// 3. Append clone of first member
+const firstMember = members[0];
+track.appendChild(createCard(firstMember, 0));
+
+let index = 1;
+let isTransitioning = false;
 
 function update() {
   const cardW = track.children[0].getBoundingClientRect().width;
   track.style.transform = `translateX(${-index * cardW}px)`;
-  prevBtn.disabled = index === 0;
-  nextBtn.disabled = index === members.length - 1;
-  [...dotsEl.children].forEach((d, i) => d.classList.toggle('active', i === index));
+  const activeDotIndex = (index - 1 + members.length) % members.length;
+  [...dotsEl.children].forEach((d, i) => d.classList.toggle('active', i === activeDotIndex));
+}
+
+function jumpTo(targetIndex) {
+  track.classList.add('no-transition');
+  index = targetIndex;
+  update();
+  track.offsetHeight; // force reflow
+  track.classList.remove('no-transition');
 }
 
 function go(i) {
-  index = Math.max(0, Math.min(members.length - 1, i));
+  if (isTransitioning || i === index) return;
+  isTransitioning = true;
+  index = i;
   update();
 }
+
+// Listen to transition end to handle infinite looping jumps seamlessly
+track.addEventListener('transitionend', (e) => {
+  if (e.target !== track || e.propertyName !== 'transform') return;
+  isTransitioning = false;
+  if (index === 0) {
+    jumpTo(members.length);
+  } else if (index === members.length + 1) {
+    jumpTo(1);
+  }
+});
 
 prevBtn.addEventListener('click', () => go(index - 1));
 nextBtn.addEventListener('click', () => go(index + 1));
@@ -719,18 +760,32 @@ window.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') go(index + 1);
 });
 
-window.addEventListener('resize', update);
+window.addEventListener('resize', () => {
+  track.classList.add('no-transition');
+  update();
+  track.offsetHeight; // force reflow
+  track.classList.remove('no-transition');
+});
 
 let touchX = null;
-track.addEventListener('touchstart', e => touchX = e.touches[0].clientX, { passive: true });
+track.addEventListener('touchstart', e => {
+  touchX = e.touches[0].clientX;
+}, { passive: true });
+
 track.addEventListener('touchend', e => {
   if (touchX === null) return;
   const dx = e.changedTouches[0].clientX - touchX;
-  if (Math.abs(dx) > 50) go(index + (dx < 0 ? 1 : -1));
+  if (Math.abs(dx) > 50) {
+    go(index + (dx < 0 ? 1 : -1));
+  }
   touchX = null;
 });
 
-requestAnimationFrame(update);
+// Initialize first screen without animation
+track.classList.add('no-transition');
+update();
+track.offsetHeight; // force reflow
+track.classList.remove('no-transition');
 </script>
 </body>
 </html>
