@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Quartet — Creative Team Portfolio</title>
 <meta name="description" content="Quartet — a four-person creative team of developers, designers, and engineers." />
+<link rel="icon" type="image/jpeg" href="assets/icons/SimpsonLogo.jpg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Syne:wght@600;800&display=swap" rel="stylesheet" />
@@ -715,7 +716,10 @@ members.forEach((m, i) => {
   const dot = document.createElement('button');
   dot.className = 'dot' + (i === 0 ? ' active' : '');
   dot.setAttribute('aria-label', `Go to ${m.first} ${m.last}`);
-  dot.addEventListener('click', () => go(i + 1));
+  dot.addEventListener('click', () => {
+    go(i + 1);
+    resetAutoplay();
+  });
   dotsEl.appendChild(dot);
 });
 
@@ -759,12 +763,24 @@ track.addEventListener('transitionend', (e) => {
   }
 });
 
-prevBtn.addEventListener('click', () => go(index - 1));
-nextBtn.addEventListener('click', () => go(index + 1));
+prevBtn.addEventListener('click', () => {
+  go(index - 1);
+  resetAutoplay();
+});
+nextBtn.addEventListener('click', () => {
+  go(index + 1);
+  resetAutoplay();
+});
 
 window.addEventListener('keydown', e => {
-  if (e.key === 'ArrowLeft')  go(index - 1);
-  if (e.key === 'ArrowRight') go(index + 1);
+  if (e.key === 'ArrowLeft') {
+    go(index - 1);
+    resetAutoplay();
+  }
+  if (e.key === 'ArrowRight') {
+    go(index + 1);
+    resetAutoplay();
+  }
 });
 
 window.addEventListener('resize', () => {
@@ -784,6 +800,7 @@ track.addEventListener('touchend', e => {
   const dx = e.changedTouches[0].clientX - touchX;
   if (Math.abs(dx) > 50) {
     go(index + (dx < 0 ? 1 : -1));
+    resetAutoplay();
   }
   touchX = null;
 });
@@ -794,6 +811,47 @@ update();
 track.offsetHeight; // force reflow
 track.classList.remove('no-transition');
 
+// Autoplay functionality
+let autoplayTimer = null;
+let isHovered = false;
+
+function startAutoplay() {
+  stopAutoplay();
+  if (isHovered) return;
+  autoplayTimer = setInterval(() => {
+    go(index + 1);
+  }, 3000);
+}
+
+function stopAutoplay() {
+  if (autoplayTimer) {
+    clearInterval(autoplayTimer);
+    autoplayTimer = null;
+  }
+}
+
+function resetAutoplay() {
+  startAutoplay();
+}
+
+// Pause autoplay on hover
+const stage = document.querySelector('.stage');
+[stage, prevBtn, nextBtn, dotsEl].forEach(el => {
+  if (!el) return;
+  el.addEventListener('mouseenter', () => {
+    isHovered = true;
+    stopAutoplay();
+  });
+  el.addEventListener('mouseleave', (e) => {
+    const toElement = e.relatedTarget;
+    if (toElement && (stage.contains(toElement) || prevBtn.contains(toElement) || nextBtn.contains(toElement) || dotsEl.contains(toElement))) {
+      return;
+    }
+    isHovered = false;
+    startAutoplay();
+  });
+});
+
 // Preload images and fade out the loader overlay
 const preloadImages = () => {
   const loader = document.getElementById('loader');
@@ -802,7 +860,10 @@ const preloadImages = () => {
 
   if (members.length === 0) {
     loader.style.opacity = '0';
-    setTimeout(() => loader.remove(), 400);
+    setTimeout(() => {
+      loader.remove();
+      startAutoplay();
+    }, 400);
     return;
   }
 
@@ -814,7 +875,10 @@ const preloadImages = () => {
       progress.textContent = `${Math.round((loaded / members.length) * 100)}%`;
       if (loaded === members.length) {
         loader.style.opacity = '0';
-        setTimeout(() => loader.remove(), 400);
+        setTimeout(() => {
+          loader.remove();
+          startAutoplay();
+        }, 400);
       }
     };
     img.onload = onDone;

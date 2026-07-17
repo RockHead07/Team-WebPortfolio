@@ -1,10 +1,10 @@
 <div align="Center">
 <img width="320" alt="Image" src="https://github.com/user-attachments/assets/a216c3f2-c9b8-4272-a243-46ff2f0dbe11" />
-
-# Quartet: Simpsons-Inspired Team Portfolio
   <img src="https://img.shields.io/badge/Theme-Simpsons%20Cartoon-FFD93D?style=for-the-badge&labelColor=2C2C2C" alt="Simpsons Theme" />
   <img src="https://img.shields.io/badge/Team-4%20Creative%20Members-FF9A00?style=for-the-badge&labelColor=4F200D" alt="4 Members" />
   <img src="https://img.shields.io/badge/Stack-HTML5%20%2F%20CSS3%20%2F%20JS-4F200D?style=for-the-badge&labelColor=FFD93D" alt="Stack" />
+
+# Quartet: Simpsons-Inspired Team Portfolio
 
 <br>
 
@@ -37,17 +37,6 @@ The UI implements a subtle overlay system using an SVG noise filter:
 
 ### 3. Springfield Atmosphere
 The page background features radial gradients reminiscent of the pastel, sunny skies of Springfield, creating a natural backdrop for the team cards.
-
-## 👥 Meet the Quartet
-
-The portfolio is structured around four unique creative personas, each represented by a dedicated card slide in the gallery track:
-
-| Portrait | Name | Role | Primary Skills & Tools |
-| :--- | :--- | :--- | :--- |
-| `aldino.png` | **Aldino** | Creative Developer & Designer | Figma, React, Motion Design |
-| `bagus.png` | **Bagus** | Product Engineer & Strategist | TypeScript, Node.js, System Design |
-| `hawwin.png` | **Hawwin** | Motion Designer & Illustrator | After Effects, Illustrator, Lottie |
-| `yardan.png` | **Yardan** | Backend Architect & DevOps | Laravel, Docker, PostgreSQL |
 
 ## 💛 Key Features
 
