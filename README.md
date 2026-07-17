@@ -9,12 +9,9 @@
 <img src="https://img.shields.io/badge/Stack-HTML5%20%2F%20CSS3%20%2F%20JS-4F200D?style=for-the-badge&labelColor=FFD93D" alt="Stack" />
 
 # Quartet: Simpsons-Inspired Team Portfolio
-
-<br>
-
 <p> 
 <em>Welcome to <strong>Quartet</strong>.</em>
-
+ 
 <sub>An interactive, high-fidelity team web portfolio designed to showcase a four-person creative collective. The visual identity, layout, and color palette of this project are deeply inspired by the iconic <strong>Simpsons cartoon aesthetic</strong>, translating a playful classic style into a sleek, premium, and modern digital portfolio.
 Whether you are looking to hire a full team or seeking design inspiration, Quartet represents the fusion of cartoon nostalgia and cutting-edge web design.
 </sub>
