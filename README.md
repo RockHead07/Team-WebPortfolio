@@ -1,4 +1,5 @@
 <div align="Center">
+
 <img width="320" alt="Image" src="https://github.com/user-attachments/assets/a216c3f2-c9b8-4272-a243-46ff2f0dbe11" />
 
   <img src="https://img.shields.io/badge/Theme-Simpsons%20Cartoon-FFD93D?style=for-the-badge&labelColor=2C2C2C" alt="Simpsons Theme" />
@@ -76,13 +77,13 @@ Since the project uses vanilla HTML, CSS, and JavaScript with no external build 
 
 Overall, that is all! A fun, playful, yet premium web portfolio themed around the iconic **Simpsons Cartoon** style.
 
-<br>
+<div align="center">
+  <img width="400" alt="Simpson Meme" src="https://media1.tenor.com/m/fUkdnZq5D_IAAAAC/simpson.gif"/>
+</div>
+
+#
 
 <div align="center">
-  <div class="tenor-gif-embed" data-postid="9027779490783760370" data-share-method="host" data-aspect-ratio="1.33562" data-width="50%"><a href="https://tenor.com/view/simpson-gif-9027779490783760370">Simpson Meme</a> from <a href="https://tenor.com/search/simpson-memes">Simpson Memes</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
-</div>
-<br>
-<div align="center">
-<sub>This project is licensed under the **WTFPL** (Do What the Fuck You Want to Public License).
+<sub>This project is licensed under <strong>WTFPL<strong> (Do What the Fuck You Want to Public License).
 </div>
 </aub>
